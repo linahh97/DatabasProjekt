@@ -25,15 +25,17 @@ namespace DatabasProjekt
                 {
                     case 1:
                         Console.WriteLine("Teacher departments:");
-                        Console.WriteLine("\n\tLanguage\n" + "\tScience\n" + 
+                        Console.WriteLine("\n\tLanguage\n" + "\tScience\n" +
                             "\tSocial\n" + "\tActivity\n");
                         Console.Write("Pick a department: ");
                         string department = Console.ReadLine();
-                     
+
                         var td = from TblTeachers in Context.TblTeachers
                                  orderby TblTeachers.TeacherId
                                  where TblTeachers.Tdepartment == department
                                  select TblTeachers;
+                        var count = td.Count();
+                        Console.WriteLine("Number of teachers in the department: " + count);
                         foreach (var items in td)
                         {
                             Console.WriteLine(items.TeacherId + " " + "-" + " " + items.Tname);
@@ -43,9 +45,9 @@ namespace DatabasProjekt
                     case 2:
                         Console.WriteLine("List of students:");
                         var student = from TblStudents in Context.TblStudents
-                                  where TblStudents.Fname == TblStudents.Fname
-                                  orderby TblStudents.Fname ascending
-                                  select TblStudents;
+                                      where TblStudents.Fname == TblStudents.Fname
+                                      orderby TblStudents.Fname ascending
+                                      select TblStudents;
 
                         foreach (var item in student)
                         {
@@ -62,9 +64,9 @@ namespace DatabasProjekt
                     case 3:
                         Console.WriteLine("List of active courses:");
                         var courses = from Course in Context.Course
-                                 orderby Course.CourseId
-                                 where Course.IsActive == "Active"
-                                 select Course;
+                                      orderby Course.CourseId
+                                      where Course.IsActive == "Active"
+                                      select Course;
                         foreach (var items in courses)
                         {
                             Console.WriteLine(items.CourseId + " " + "-" + " " + items.CourseName);
